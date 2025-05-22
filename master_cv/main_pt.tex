@@ -1,0 +1,90 @@
+% Rover Resume - Base Template
+% Link: https://github.com/subidit/rover-resume
+
+
+\documentclass[11pt]{article} % fontsize 10pt/11pt/12pt
+
+\usepackage[margin=1in, a4paper]{geometry}
+\setcounter{secnumdepth}{0} % remove section numbering
+\usepackage{titlesec}
+\titlespacing{\subsection}{0pt}{*0}{*0} % remove vertical spacing above and below
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\large\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,left=0pt .. \parindent}
+\pagestyle{empty} % remove page number
+\pdfgentounicode=1
+
+
+\begin{document}
+
+\begin{center}
+	\begin{minipage}{0.5\textwidth}
+		{\Huge\bfseries
+			Gustavo Lazzari % Name Here
+		} \\ \medskip
+	\end{minipage} \hfill
+	\begin{minipage}{0.4\textwidth}
+		\raggedleft
+		Email: gustavotlazzari@gmail.com \\
+		Mobile: +55 041 987732772 \\
+		LinkedIn: linkedin.com/in/glazzari \\
+		GitHub: github.com/GLazzari1428
+		Curitiba, PR, Brasil
+	\end{minipage}
+\end{center}
+
+\section{Educação}
+%=================%
+\subsection{Pontificia Universidade Católica do Paraná $|$ {\normalfont\itshape Ciência da Computação} \hfill 2024-2028}
+\begin{itemize}
+	\item Data de conclusão esperada: Junho 2028
+	\item Estrutura de Dados, Sistemas Operacionais, Banco de Dados, Programação Orientada a Objetos
+\end{itemize}
+\subsection{Colégio Suíço-Brasileiro de Curitiba $|$ {\normalfont\itshape Ensino Médio} \hfill 2017-2020}
+\begin{itemize}
+	\item Diploma Brasileiro do Ensino Médio
+	\item Diploma Bilingue IB (Bacharelado Internacional) $|$ NOTA: 28/45
+\end{itemize}
+
+\section{Experiência}
+%=================%
+\subsection{Tribunal de Justiça do Paraná \hfill Curitiba, Paraná}
+\subsubsection{Estágiario de Desenvolvimento de Software \hfill  Aug 2021 - Dec 2022}
+\begin{itemize}
+    \item Participei ativamente no desenvolvimento e manutenção de um sistema de gestão acadêmica, utilizando diversas tecnologias (PHP, MySQL, HTML/CSS).
+	\item Implementei e utilizei Docker, Docker Compose e GitHub Actions, otimizando os processos de desenvolvimento por meio de práticas de CI/CD.
+	\item Colaborei com membros da equipe no design de funcionalidades, em revisões de código, na depuração e na resolução de problemas técnicos, garantindo a qualidade do software.
+	\item Implantei infraestrutura para hospedagem e processamento de dados em plataformas de nuvem (AWS EC2, GCP Compute Engine).
+\end{itemize}
+
+
+\section{Certificações}
+%===============================%
+\begin{enumerate}[label=\null, left=0pt..0pt, itemsep=0pt]
+    \item Cambridge Advanced English (CAE $|$ Nível B2).
+	\item Deutsches Sprachdiplom (DSD $|$ Nível B1/B2).
+%	\item Diploma IB de Linguas (Alemão e Inglês).
+\end{enumerate}
+
+\section{Habilidades \& Interesses}
+%===========================%
+\begin{description}[itemsep=0pt]
+	\item[Tecnologias] Python, Bash, PHP, JavaScript, C, Java, SQL, Docker, Kubernetes
+	\item[Linguas] Português (Nativo), Inglês (Fluente), Alemão (Intermediário).
+	\item[Hospedagem] AWS, GCP, Azure, Promox, Grafana, Prometheus, 
+	\item[Interesses] Infraestrutura, Música, Hospedagem, IOT, Automação Residencial, Linux.
+\end{description}
+
+\section{Projetos}
+%=================
+\subsection{Homelab (Laboratório de Computação)$|$ \normalfont\textit{servidor para estudos} \hfill em andamento}
+\begin{itemize}
+  \item Utilizo Proxmox, Docker, Home Assistant, Virtualização, pfSense, Nginx, Grafana, Kubernetes, Portainer.
+  \item Implementação de diversas tecnologias da indústria, com a finalidade de aprendizado de solução de problemas. 
+  \item Aprendi a utilizar virtualização e automação para implementar sistemas mais robustos.
+\end{itemize}
+
+\end{document}
+

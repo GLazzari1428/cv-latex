@@ -1,0 +1,90 @@
+\documentclass[a4paper,10pt]{article} % Defines document type and paper/font size
+\usepackage[a4paper,margin=1in]{geometry} % Sets page margins
+\usepackage{enumitem} % Allows list customization (like removing item separation)
+\usepackage{hyperref} % Creates clickable links (email, web)
+\usepackage[T1]{fontenc} % Improves font encoding (hyphenation, special characters)
+% \usepackage{lmodern} % Commented out to use default Computer Modern font
+\usepackage[utf8]{inputenc} % Allows direct use of UTF-8 characters (like accents if needed)
+
+\renewcommand{\baselinestretch}{1.1} % Slightly adjust line spacing
+\urlstyle{same} % Makes URLs use the same font as normal text
+
+\begin{document}
+
+% --- Header ---
+\begin{center}
+    {\LARGE\textbf{Gustavo Tasca Lazzari}} \\ % Name highlighted
+    \vspace{2mm} % Small vertical space
+    Curitiba, PR, Brazil \\ % Location
+    +55 41 98773-2772 | \href{mailto:gustavotlazzari@gmail.com}{gustavotlazzari@gmail.com} | \href{https://www.linkedin.com/in/glazzari/}{linkedin.com/in/glazzari} | \href{https://github.com/GLazzari1428}{github.com/GLazzari1428} % Contact and links
+\end{center}
+
+% --- Summary ---
+\section*{Summary}
+% (Remember to tailor this section for EACH application!)
+Highly motivated and versatile Computer Science student with extensive hands-on experience across Linux systems administration, cloud platforms (AWS, GCP), virtualization (Proxmox), containerization (Docker), networking, cybersecurity fundamentals, and software development (PHP, Python, Bash). Proven ability to manage complex projects (home lab), troubleshoot technical issues, and contribute effectively to team goals, as demonstrated during a software development internship. Eager to apply broad technical skills and passion for technology to a challenging internship role in [Target Area - e.g., Cloud Engineering, DevOps, Cybersecurity, Systems Administration, Software Development]. Possesses strong problem-solving, organizational, and documentation skills.
+
+% --- Technical Skills ---
+\section*{Technical Skills}
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt, leftmargin=*] % List without extra spacing
+    \item \textbf{Programming \& Scripting:} Python, Bash, PHP, Laravel, JavaScript, C, Java, SQL.
+    \item \textbf{Operating Systems:} Advanced Linux and Windows.
+    \item \textbf{Containerization \& Virtualization:} Docker (Advanced), Docker Compose, Proxmox VE (Full VM Management), VMware, VirtualBox.
+    \item \textbf{Web Technologies:} NGINX, Apache2, WordPress Deployment \& Management, HTML, CSS.
+    \item \textbf{CI/CD \& Version Control:} Git, GitHub, GitHub Actions.
+    \item \textbf{Networking:} DNS Configuration, Firewall Configuration (iptables, UFW), VPN (WireGuard, OpenVPN), Reverse Proxy Configuration (NGINX).
+    \item \textbf{Cloud Platforms:} AWS (EC2, Lambda), Google Cloud Platform (GCP Compute Engine), Studying Microsoft Azure
+    \item \textbf{Databases:} MySQL, MariaDB
+    \item \textbf{Monitoring \& Logging:} Prometheus, Grafana
+    \item \textbf{Security:} Nmap, Wireshark, OSINT Fundamentals, Network Security Principles
+    \item \textbf{Hardware \& Storage:} Server Hardware Assembly \& Troubleshooting, HDD/SSD Management \& Troubleshooting, RAID Configuration, ZFS Filesystem Management % Corrected & to \&
+    \item \textbf{Other Tools:} Microsoft Office Suite, Moodle, LaTeX
+\end{itemize}
+
+% --- Professional Experience ---
+\section*{Professional Experience}
+\textbf{Tribunal de Justiça do Paraná (TJPR – EJUD)} \hfill Curitiba, Brazil \\ % Company and Location
+\textit{Software Development Intern} \hfill Aug 2021 – Dec 2022 % Role and Period (End date based on previous LaTeX example)
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt, leftmargin=*]
+    \item Actively participated in the software development lifecycle, including development and maintenance of a school management system (PHP/Laravel, MySQL, HTML/CSS).
+    \item Implemented and utilized Docker, Docker Compose, and GitHub Actions, streamlining development and deployment processes through CI/CD practices.
+    \item Collaborated with team members on feature design, code reviews, debugging, and technical problem-solving, ensuring software quality.
+    \item Authored detailed technical documentation, contributing to project knowledge management.
+    \item Managed application components on cloud infrastructure (AWS EC2, GCP Compute Engine).
+\end{itemize}
+
+% --- Projects ---
+\section*{Projects}
+\textbf{Personal Home Lab \& Infrastructure} \hfill \textit{Ongoing}
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt, leftmargin=*]
+    \item Manage a multi-server home lab environment (Linux with Proxmox), demonstrating skills in systems administration, virtualization, and networking.
+    \item Configure and maintain numerous Docker containers hosting diverse applications (web servers, databases), validating knowledge in containerization and web technologies (NGINX, Apache2).
+    \item Implemented robust network solutions including DNS (PiHole), VPNs (WireGuard/OpenVPN), and firewalls, and established monitoring with Prometheus/Grafana, showcasing networking and observability competence.
+    \item Utilize the environment for continuous learning and experimentation in information security, applying tools like Nmap and Wireshark and hardening concepts.
+    \item Perform hardware and software troubleshooting, developing practical problem-solving skills.
+\end{itemize}
+\vspace{2mm} % Small vertical space between projects
+\textbf{WordPress Website Deployments} \hfill \textit{Personal Projects}
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt, leftmargin=*]
+    \item Deployed and managed WordPress websites using Docker, NGINX/Apache, and MySQL, covering the full cycle from server setup to security and optimization.
+\end{itemize}
+
+% --- Education ---
+\section*{Education}
+\textbf{Pontifícia Universidade Católica do Paraná (PUCPR)} \hfill Curitiba, Brazil \\
+\textit{Bachelor of Science in Computer Science} \hfill 2024 – 2028 (Expected) % Updated Degree and Dates
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt, leftmargin=*]
+    \item Relevant Coursework: Data Structures \& Algorithms, Operating Systems, Computer Networks, Database Management, Object-Oriented Programming, Software Engineering Principles. % Corrected & to \&
+\end{itemize}
+\vspace{2mm}
+\textbf{Colégio Suíço-Brasileiro de Curitiba} \hfill Curitiba, Brazil \\
+\textit{Dual High School Diploma (Brazilian National \& International Baccalaureate - IB)} % Corrected & to \&
+
+% --- Certifications & Languages ---
+\section*{Certifications \& Languages}
+\begin{itemize}[noitemsep, topsep=0pt, partopsep=0pt, leftmargin=*]
+    \item \textbf{Certifications:} Cambridge Advanced English (CAE) - B1/B2 Level, Deutsches Sprachdiplom (DSD) - B1/B2 Level
+    \item \textbf{Languages:} Portuguese (Native), English (Fluent), German (Intermediate)
+\end{itemize}
+
+\end{document}
