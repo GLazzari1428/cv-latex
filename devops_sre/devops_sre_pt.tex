@@ -1,0 +1,85 @@
+% Gustavo Lazzari — DevOps / Engenheiro de Confiabilidade de Sites (SRE)
+% Gerado: 2026-02-26
+% Template: Baseado em Rover Resume (https://github.com/subidit/rover-resume)
+
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.6in, a4paper]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{5pt}{2pt}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+\titlespacing{\subsubsection}{0pt}{2pt}{1pt}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,topsep=1pt,left=0pt .. \parindent}
+\setlist[description]{noitemsep,topsep=1pt,itemsep=1pt}
+\pagestyle{empty}
+\pdfgentounicode=1
+\setlength{\parskip}{1pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\urlstyle{same}
+
+\begin{document}
+
+\begin{center}
+	{\LARGE\bfseries Gustavo Lazzari} \\
+	\vspace{2pt}
+	\href{mailto:gustavotlazzari@gmail.com}{gustavotlazzari@gmail.com} $|$
+	+55 41 98773-2772 $|$
+	\href{https://www.linkedin.com/in/glazzari}{linkedin.com/in/glazzari} $|$
+	\href{https://github.com/GLazzari1428}{github.com/GLazzari1428} $|$
+	Curitiba, PR, Brasil
+\end{center}
+
+\section{Forma\c{c}\~{a}o Acad\^{e}mica}
+\subsection{Pontif\'{i}cia Universidade Cat\'{o}lica do Paran\'{a} $|$ {\normalfont\itshape Bacharelado em Ci\^{e}ncia da Computa\c{c}\~{a}o} \hfill 2024 -- 2028}
+\begin{itemize}
+	\item Conclus\~{a}o prevista: Junho 2028 $|$ Sistemas Operacionais, Seguran\c{c}a de Redes, Banco de Dados, Estrutura de Dados
+\end{itemize}
+\subsection{Col\'{e}gio Su\'{i}\c{c}o-Brasileiro de Curitiba $|$ {\normalfont\itshape Ensino M\'{e}dio e Diploma Bil\'{i}ngue IB} \hfill 2017 -- 2020}
+
+\section{Experi\^{e}ncia Profissional}
+\subsection{Tribunal de Justi\c{c}a do Paran\'{a} (TJPR) \hfill Curitiba, Brasil}
+\subsubsection{Estagi\'{a}rio de DevOps / TI \hfill Ago 2021 -- Dez 2022}
+\begin{itemize}
+	\item Projetei e implementei pipelines de CI/CD utilizando GitHub Actions, Docker e Docker Compose para testes, builds e deploys automatizados de aplica\c{c}\~{o}es web.
+	\item Gerenciei o ciclo de vida de aplica\c{c}\~{o}es containerizadas em plataformas de nuvem (AWS EC2, GCP Compute Engine), realizando provisionamento, deploy e monitoramento.
+	\item Padronizei ambientes de desenvolvimento com containers Docker, reduzindo diverg\^{e}ncias de configura\c{c}\~{a}o entre desenvolvimento e produ\c{c}\~{a}o.
+\end{itemize}
+
+\section{Projetos}
+\subsection{Plataforma de Containers de N\'{i}vel Profissional $|$ \normalfont\textit{20+ Servi\c{c}os, Cluster de Dois N\'{o}s} \hfill Em Andamento}
+\begin{itemize}
+	\item Arquitetei e opero um cluster Proxmox VE de dois n\'{o}s hospedando 20+ servi\c{c}os containerizados (Docker/LXC), incluindo servidores de m\'{i}dia, NVR, nuvem privada, monitoramento e automa\c{c}\~{a}o residencial --- tratando infraestrutura pessoal com padr\~{o}es de confiabilidade de n\'{i}vel profissional.
+	\item Projetei orquestra\c{c}\~{a}o automatizada de backups: n\'{o} secund\'{a}rio dedicado gerencia todos os snapshots de VMs/containers com replica\c{c}\~{a}o offsite para Google Drive, garantindo prontid\~{a}o para recupera\c{c}\~{a}o de desastres.
+	\item Implantei DNS de alta disponibilidade (PiHole em ambos os n\'{o}s), eliminando pontos \'{u}nicos de falha; configurei armazenamento ZFS com monitoramento proativo de sa\'{u}de dos discos e experi\^{e}ncia pr\'{a}tica em recupera\c{c}\~{a}o de falhas.
+	\item Implementei pipeline de transcodifica\c{c}\~{a}o acelerada por GPU (Quadro P400): PCI passthrough para Jellyfin VM e mapeamento de dispositivos para Tdarr LXC, habilitando codifica\c{c}\~{a}o H.265 distribu\'{i}da no cluster.
+\end{itemize}
+
+\subsection{Arquitetura de Observabilidade \& Acesso Seguro $|$ \normalfont\textit{Monitoramento, VPN, Zero Trust} \hfill Em Andamento}
+\begin{itemize}
+	\item Implantei stack completa de monitoramento: Prometheus para coleta de m\'{e}tricas, Grafana para visualiza\c{c}\~{a}o e alertas, Scrutiny para an\'{a}lise preditiva de falhas de disco via dados S.M.A.R.T., e Glance para dashboards centralizados.
+	\item Projetei arquitetura de acesso em m\'{u}ltiplas camadas: VPN WireGuard com proxy reverso Nginx para servi\c{c}os internos (\texttt{glza.xyz}), Cloudflare Zero Trust com TOTP para endpoints p\'{u}blicos (\texttt{glza.cloud}).
+	\item Configurei segmenta\c{c}\~{a}o de rede via VLANs (IoT/produ\c{c}\~{a}o) com regras de firewall OPNsense; gerenciamento automatizado de certificados SSL/TLS via Certbot com desafios DNS Cloudflare.
+	\item Gerencio infraestrutura de identidade: Vaultwarden auto-hospedado para gerenciamento de credenciais e PocketID para autentica\c{c}\~{a}o centralizada.
+\end{itemize}
+
+\section{Habilidades T\'{e}cnicas}
+\begin{description}
+	\item[Containers \& Virtualiza\c{c}\~{a}o] Docker, Docker Compose, LXC, Proxmox VE (multi-n\'{o}), GPU passthrough, systemd
+	\item[CI/CD \& Automa\c{c}\~{a}o] GitHub Actions, Bash Scripting, YAML/IaC, Python, pipelines automatizados de backup
+	\item[Monitoramento \& Observabilidade] Prometheus, Grafana, Scrutiny (S.M.A.R.T.), Glance, an\'{a}lise de logs
+	\item[Redes \& Seguran\c{c}a] Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), OPNsense, PiHole, SSL/TLS, VLANs
+	\item[Cloud \& Infraestrutura] AWS (EC2), GCP (Compute Engine), Linux Admin (Arch/Debian), ZFS, RAID
+	\item[Idiomas] Portugu\^{e}s (Nativo), Ingl\^{e}s (Fluente), Alem\~{a}o (Intermedi\'{a}rio)
+\end{description}
+
+\section{Certifica\c{c}\~{o}es}
+Cambridge Advanced English (CAE -- B2) $|$ Deutsches Sprachdiplom (DSD -- B1/B2) $|$ Em prepara\c{c}\~{a}o: AWS Certified Cloud Practitioner (CLF-C02)
+
+\end{document}

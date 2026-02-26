@@ -1,0 +1,90 @@
+% Gustavo Lazzari — IoT & Home Automation Engineer
+% Generated: 2026-02-26
+% Template: Based on Rover Resume (https://github.com/subidit/rover-resume)
+
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.6in, a4paper]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{5pt}{2pt}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+\titlespacing{\subsubsection}{0pt}{2pt}{1pt}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,topsep=1pt,left=0pt .. \parindent}
+\setlist[description]{noitemsep,topsep=1pt,itemsep=1pt}
+\pagestyle{empty}
+\pdfgentounicode=1
+\setlength{\parskip}{1pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\urlstyle{same}
+
+\begin{document}
+
+\begin{center}
+	{\LARGE\bfseries Gustavo Lazzari} \\
+	\vspace{2pt}
+	\href{mailto:gustavotlazzari@gmail.com}{gustavotlazzari@gmail.com} $|$
+	+55 41 98773-2772 $|$
+	\href{https://www.linkedin.com/in/glazzari}{linkedin.com/in/glazzari} $|$
+	\href{https://github.com/GLazzari1428}{github.com/GLazzari1428} $|$
+	Curitiba, PR, Brazil
+\end{center}
+
+\section{Education}
+\subsection{Pontifical Catholic University of Paran\'{a} $|$ {\normalfont\itshape B.Sc. Computer Science} \hfill 2024 -- 2028}
+\begin{itemize}
+	\item Expected graduation: June 2028 $|$ Operating Systems, Databases, Network Security, Data Structures
+\end{itemize}
+\subsection{Swiss School of Curitiba $|$ {\normalfont\itshape High School \& IB Bilingual Diploma} \hfill 2017 -- 2020}
+
+\section{Experience}
+\subsection{Court of Justice of Paran\'{a} (TJPR) \hfill Curitiba, Brazil}
+\subsubsection{IT Intern \hfill Aug 2021 -- Dec 2022}
+\begin{itemize}
+	\item Deployed and maintained containerized applications using Docker and Docker Compose on cloud infrastructure (AWS EC2, GCP Compute Engine).
+	\item Implemented CI/CD automation with GitHub Actions; configured Nginx and Apache web servers for application hosting.
+\end{itemize}
+
+\section{Projects}
+\subsection{Smart Home IoT Network $|$ \normalfont\textit{10+ ESP32 Devices / ESPHome / MQTT} \hfill Ongoing}
+\begin{itemize}
+	\item Deploy and maintain a network of 10+ ESP32 microcontrollers for smart lighting control, intelligent switches, and ambient LED installations (WLED), fully configured via ESPHome using YAML and Jinja2 templating.
+	\item Integrate all IoT devices with Home Assistant through MQTT for centralized automation rules, scheduling, and real-time monitoring of the home environment.
+	\item Currently building a custom Home Assistant remote controller using salvaged Cherry MX mechanical switches and an ESP32, designed and configured entirely through ESPHome.
+	\item Replaced commercial voice assistants (Alexa) with custom ESP32-based solutions, maintaining full local control without cloud dependencies.
+\end{itemize}
+
+\subsection{AI-Powered Security \& Surveillance $|$ \normalfont\textit{Frigate NVR / Object Detection} \hfill Ongoing}
+\begin{itemize}
+	\item Deployed Frigate NVR for real-time local video processing with AI-driven object detection, integrated with Home Assistant for automated alerting and event-driven actions.
+	\item Configured GPU-accelerated video processing pipeline using Quadro P400 with hardware passthrough in Proxmox VE.
+\end{itemize}
+
+\subsection{Supporting Server Infrastructure $|$ \normalfont\textit{Proxmox / Docker / Monitoring} \hfill Ongoing}
+\begin{itemize}
+	\item Operate a two-node Proxmox VE cluster (20+ VMs/LXCs) providing the backbone for all IoT services, including MQTT brokers, Home Assistant, Frigate, and monitoring infrastructure.
+	\item Configured secure remote access via WireGuard VPN and Cloudflare Zero Trust, enabling reliable control of home automation from anywhere.
+	\item Maintain observability with Prometheus and Grafana for system metrics, Scrutiny for disk health monitoring, and automated backups with offsite replication.
+\end{itemize}
+
+\section{Technical Skills}
+\begin{description}
+	\item[IoT \& Embedded] ESP32, ESPHome (YAML/Jinja2), MQTT, WLED, sensor integration, relay control, microcontroller deployment
+	\item[Home Automation] Home Assistant (advanced automations, integrations), Frigate NVR (AI object detection), Navidrome
+	\item[Hardware \& Electronics] Soldering (8+ years daily experience), component-level repair, desoldering, PCB modification, custom enclosure design
+	\item[Infrastructure] Linux Admin (Arch/Debian), Proxmox VE, Docker, Docker Compose, ZFS, systemd
+	\item[Networking] WireGuard, Cloudflare (Tunnels/Zero Trust), Nginx, PiHole, OPNsense, VLAN segmentation
+	\item[Scripting \& Automation] Bash, Python, YAML/IaC, GitHub Actions
+	\item[Languages] Portuguese (Native), English (Fluent), German (Intermediate)
+\end{description}
+
+\section{Certifications}
+Cambridge Advanced English (CAE -- B2) $|$ Deutsches Sprachdiplom (DSD -- B1/B2) $|$ Currently pursuing: AWS Certified Cloud Practitioner (CLF-C02)
+
+\end{document}

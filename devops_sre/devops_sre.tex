@@ -1,0 +1,85 @@
+% Gustavo Lazzari — DevOps / Site Reliability Engineer (SRE)
+% Generated: 2026-02-26
+% Template: Based on Rover Resume (https://github.com/subidit/rover-resume)
+
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.6in, a4paper]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{5pt}{2pt}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+\titlespacing{\subsubsection}{0pt}{2pt}{1pt}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,topsep=1pt,left=0pt .. \parindent}
+\setlist[description]{noitemsep,topsep=1pt,itemsep=1pt}
+\pagestyle{empty}
+\pdfgentounicode=1
+\setlength{\parskip}{1pt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\urlstyle{same}
+
+\begin{document}
+
+\begin{center}
+	{\LARGE\bfseries Gustavo Lazzari} \\
+	\vspace{2pt}
+	\href{mailto:gustavotlazzari@gmail.com}{gustavotlazzari@gmail.com} $|$
+	+55 41 98773-2772 $|$
+	\href{https://www.linkedin.com/in/glazzari}{linkedin.com/in/glazzari} $|$
+	\href{https://github.com/GLazzari1428}{github.com/GLazzari1428} $|$
+	Curitiba, PR, Brazil
+\end{center}
+
+\section{Education}
+\subsection{Pontifical Catholic University of Paran\'{a} $|$ {\normalfont\itshape B.Sc. Computer Science} \hfill 2024 -- 2028}
+\begin{itemize}
+	\item Expected graduation: June 2028 $|$ Operating Systems, Network Security, Databases, Data Structures
+\end{itemize}
+\subsection{Swiss School of Curitiba $|$ {\normalfont\itshape High School \& IB Bilingual Diploma} \hfill 2017 -- 2020}
+
+\section{Experience}
+\subsection{Court of Justice of Paran\'{a} (TJPR) \hfill Curitiba, Brazil}
+\subsubsection{DevOps / IT Intern \hfill Aug 2021 -- Dec 2022}
+\begin{itemize}
+	\item Designed and implemented CI/CD pipelines using GitHub Actions, Docker, and Docker Compose for automated testing, building, and deployment of web applications.
+	\item Managed containerized application lifecycle across cloud platforms (AWS EC2, GCP Compute Engine), handling provisioning, deployment, and monitoring.
+	\item Standardized development environments with Docker containers, reducing configuration drift between development and production deployments.
+\end{itemize}
+
+\section{Projects}
+\subsection{Production-Grade Container Platform $|$ \normalfont\textit{20+ Services, Two-Node Cluster} \hfill Ongoing}
+\begin{itemize}
+	\item Architected and operate a two-node Proxmox VE cluster hosting 20+ containerized services (Docker/LXC), including media servers, NVR, private cloud, monitoring, and home automation --- treating personal infrastructure with production-level reliability standards.
+	\item Engineered automated backup orchestration: dedicated secondary node manages all VM/container snapshots with offsite replication to Google Drive, ensuring disaster recovery readiness across the entire platform.
+	\item Deployed high-availability DNS (PiHole across both nodes), eliminating single points of failure; configured ZFS storage with proactive disk health monitoring and hands-on failure recovery experience.
+	\item Implemented GPU-accelerated transcoding pipeline (Quadro P400): PCI passthrough for Jellyfin VM and device mapping for Tdarr LXC, enabling distributed H.265 encoding across the cluster.
+\end{itemize}
+
+\subsection{Observability \& Secure Access Architecture $|$ \normalfont\textit{Monitoring, VPN, Zero Trust} \hfill Ongoing}
+\begin{itemize}
+	\item Deployed comprehensive monitoring stack: Prometheus for metrics collection, Grafana for visualization and alerting, Scrutiny for predictive disk failure analysis via S.M.A.R.T. data, and Glance for centralized dashboarding.
+	\item Engineered multi-layer access architecture: WireGuard VPN with Nginx reverse proxy for internal services (\texttt{glza.xyz}), Cloudflare Zero Trust with TOTP for public endpoints (\texttt{glza.cloud}).
+	\item Configured VLAN network segmentation (IoT/production) with OPNsense firewall rules; automated SSL/TLS certificate management via Certbot with Cloudflare DNS challenges.
+	\item Manage identity infrastructure: self-hosted Vaultwarden for credential management and PocketID for centralized authentication.
+\end{itemize}
+
+\section{Technical Skills}
+\begin{description}
+	\item[Containers \& Virtualization] Docker, Docker Compose, LXC, Proxmox VE (multi-node), GPU passthrough, systemd
+	\item[CI/CD \& Automation] GitHub Actions, Bash Scripting, YAML/IaC, Python, automated backup pipelines
+	\item[Monitoring \& Observability] Prometheus, Grafana, Scrutiny (S.M.A.R.T.), Glance, log analysis
+	\item[Networking \& Security] Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), OPNsense, PiHole, SSL/TLS, VLANs
+	\item[Cloud \& Infrastructure] AWS (EC2), GCP (Compute Engine), Linux Admin (Arch/Debian), ZFS, RAID
+	\item[Languages] Portuguese (Native), English (Fluent), German (Intermediate)
+\end{description}
+
+\section{Certifications}
+Cambridge Advanced English (CAE -- B2) $|$ Deutsches Sprachdiplom (DSD -- B1/B2) $|$ Currently pursuing: AWS Certified Cloud Practitioner (CLF-C02)
+
+\end{document}
