@@ -63,8 +63,8 @@
 
 \subsection{Observability \& Secure Access Architecture $|$ \normalfont\textit{Monitoring, VPN, Zero Trust} \hfill Ongoing}
 \begin{itemize}
-	\item Deployed comprehensive monitoring stack: Prometheus for metrics collection, Grafana for visualization and alerting, Scrutiny for predictive disk failure analysis via S.M.A.R.T. data, and Glance for centralized dashboarding.
-	\item Engineered multi-layer access architecture: WireGuard VPN with Nginx reverse proxy for internal services (\texttt{glza.xyz}), Cloudflare Zero Trust with TOTP for public endpoints (\texttt{glza.cloud}).
+	\item Deployed comprehensive monitoring stack: Prometheus for metrics collection, Grafana for visualization and alerting, and Scrutiny for predictive disk failure analysis via S.M.A.R.T. data.
+	\item Engineered multi-layer access architecture: WireGuard VPN with Nginx reverse proxy for internal services, Cloudflare Zero Trust with TOTP for public-facing endpoints.
 	\item Configured VLAN network segmentation (IoT/production) with OPNsense firewall rules; automated SSL/TLS certificate management via Certbot with Cloudflare DNS challenges.
 	\item Manage identity infrastructure: self-hosted Vaultwarden for credential management and PocketID for centralized authentication.
 \end{itemize}
@@ -73,7 +73,7 @@
 \begin{description}
 	\item[Containers \& Virtualization] Docker, Docker Compose, LXC, Proxmox VE (multi-node), GPU passthrough, systemd
 	\item[CI/CD \& Automation] GitHub Actions, Bash Scripting, YAML/IaC, Python, automated backup pipelines
-	\item[Monitoring \& Observability] Prometheus, Grafana, Scrutiny (S.M.A.R.T.), Glance, log analysis
+	\item[Monitoring \& Observability] Prometheus, Grafana, Scrutiny (S.M.A.R.T.), log analysis
 	\item[Networking \& Security] Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), OPNsense, PiHole, SSL/TLS, VLANs
 	\item[Cloud \& Infrastructure] AWS (EC2), GCP (Compute Engine), Linux Admin (Arch/Debian), ZFS, RAID
 	\item[Languages] Portuguese (Native), English (Fluent), German (Intermediate)

@@ -66,7 +66,7 @@
 \begin{itemize}
 	\item Configured VLAN segmentation (IoT/production) with enterprise-grade firewall rules via OPNsense (migrating to OpenWRT); practical knowledge of routing, subnets, and inter-VLAN policies.
 	\item Deployed Nginx reverse proxy behind WireGuard VPN for secure internal access; Cloudflare tunnels with Zero Trust and TOTP for public-facing services.
-	\item Implemented dual-domain architecture: \texttt{glza.xyz} (VPN-only) and \texttt{glza.cloud} (public) with automated SSL/TLS via Certbot and Cloudflare DNS challenges.
+	\item Implemented automated SSL/TLS certificate management via Certbot with Cloudflare DNS challenges for all exposed services.
 	\item Self-host identity and credential management: Vaultwarden (password vault) and PocketID (identity provider).
 \end{itemize}
 
@@ -75,7 +75,7 @@
 	\item[Systems Administration] Linux (Arch/Debian), Proxmox VE (multi-node), Docker, Docker Compose, LXC, systemd, ZFS, RAID
 	\item[Networking \& Security] OPNsense, OpenWRT, Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), PiHole, SSL/TLS, VLANs
 	\item[Storage \& Backup] ZFS pool management, disk failure recovery, Proxmox Backup, offsite replication, S.M.A.R.T. monitoring (Scrutiny)
-	\item[Monitoring] Prometheus, Grafana, Scrutiny, Glance
+	\item[Monitoring] Prometheus, Grafana, Scrutiny (S.M.A.R.T.)
 	\item[Cloud \& Automation] AWS (EC2), GCP, GitHub Actions, Bash, Python, YAML/IaC
 	\item[Languages] Portuguese (Native), English (Fluent), German (Intermediate)
 \end{description}
