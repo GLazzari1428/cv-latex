@@ -4,4 +4,5 @@
 *.out
 *.synctex.gz
 *.fls
-*.fdb_latexmk
+*.fdb_latexmk.data/jobspy-venv/
+.data/jobs_*.csv
