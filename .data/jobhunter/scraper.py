@@ -12,44 +12,79 @@ from jobspy import scrape_jobs
 from models import get_profiles, log_scrape_run, upsert_job
 
 
+# Keywords that indicate a job is NOT junior/intern level (checked against TITLE only)
+SENIOR_TITLE_KEYWORDS = [
+    "senior", "sr.", "sr ", "pleno", "pl ", "pl.", "mid-level", "mid level",
+    "specialist", "especialista", "lead", "principal", "staff", "manager",
+    "director", "head of", "architect", "gerente", "coordenador",
+    "analista pl", "analista sr", "engenheiro pl", "engenheiro sr",
+]
+
+# Keywords that indicate a job IS junior/intern level (checked against TITLE)
+JUNIOR_TITLE_KEYWORDS = [
+    "junior", "jr", "jr.", "estagio", "estagi", "intern", "entry",
+    "trainee", "aprendiz", "entry-level", "associate",
+]
+
+
+def is_relevant_level(row: dict) -> bool:
+    """
+    Hard filter: returns False if the job title indicates senior/mid level.
+    A job passes if:
+    1. The title contains a junior/intern keyword, OR
+    2. The title does NOT contain any senior keyword.
+    This means unlabeled jobs (no level in title) pass through.
+    """
+    title = (row.get("title") or "").lower()
+
+    has_junior = any(kw in title for kw in JUNIOR_TITLE_KEYWORDS)
+    has_senior = any(kw in title for kw in SENIOR_TITLE_KEYWORDS)
+
+    # If title explicitly says junior/intern, always keep it
+    if has_junior:
+        return True
+    # If title explicitly says senior/pleno/etc, drop it
+    if has_senior:
+        return False
+    # No level indicator -- keep it (could be an unlabeled junior role)
+    return True
+
+
 def score_relevance(row: dict) -> int:
     """Score a job's relevance to Gustavo's profile (0-100)."""
     score = 0
-    text = f"{row.get('title', '')} {row.get('description', '')}".lower()
+    title = (row.get("title") or "").lower()
+    text = f"{title} {row.get('description', '')}".lower()
 
-    # Strong signals (infrastructure/ops focus)
-    strong = [
+    # Strong signals in TITLE (infrastructure/ops focus)
+    title_strong = [
         "devops", "sre", "site reliability", "infrastructure", "sysadmin",
-        "systems admin", "platform engineer", "cloud engineer",
-        "infraestrutura", "operacoes", "observabilidade",
+        "systems admin", "platform engineer", "cloud engineer", "cloud ops",
+        "infraestrutura", "operacoes", "observabilidade", "suporte ti",
+        "analista de ti", "analista ti",
     ]
-    for kw in strong:
-        if kw in text:
-            score += 15
+    for kw in title_strong:
+        if kw in title:
+            score += 20
 
-    # Tech stack matches
+    # Tech stack matches (in full text including description)
     tech = [
         "docker", "linux", "proxmox", "prometheus", "grafana", "nginx",
         "wireguard", "cloudflare", "github actions", "ci/cd", "ansible",
         "terraform", "kubernetes", "k8s", "aws", "gcp", "zfs",
-        "opnsense", "pihole", "bash", "python", "mqtt", "esphome",
-        "home assistant", "containers", "lxc",
+        "opnsense", "bash", "python", "containers", "lxc",
     ]
     for kw in tech:
         if kw in text:
             score += 3
 
-    # Level signals (bonus for junior/intern)
-    if any(w in text for w in ["junior", "junior", "jr", "estagio", "intern", "entry"]):
-        score += 10
+    # Level signals (bonus for junior/intern in title)
+    if any(w in title for w in JUNIOR_TITLE_KEYWORDS):
+        score += 25
 
     # Location bonus
     if any(w in text for w in ["curitiba", "remoto", "remote", "latam"]):
         score += 5
-
-    # Penalty for senior roles
-    if any(w in text for w in ["senior", "senior", "sr.", "lead", "principal", "staff"]):
-        score -= 20
 
     return max(0, min(100, score))
 
@@ -149,7 +184,13 @@ def scrape_profile(profile_name, results_per_search=30, progress_callback=None):
             )
 
             new_count = 0
+            filtered_count = 0
             for job in results:
+                # Hard filter: reject senior/pleno/mid roles
+                if not is_relevant_level(job):
+                    filtered_count += 1
+                    continue
+
                 job["search_profile"] = pname
                 job["search_term"] = term
                 job["relevance_score"] = score_relevance(job)
@@ -157,13 +198,15 @@ def scrape_profile(profile_name, results_per_search=30, progress_callback=None):
                 if is_new:
                     new_count += 1
 
-            total_found += len(results)
+            kept = len(results) - filtered_count
+            total_found += kept
             total_new += new_count
 
             if progress_callback:
-                progress_callback(
-                    f"[{pname}] ({i}/{len(searches)}) Found {len(results)} results ({new_count} new)"
-                )
+                msg = f"[{pname}] ({i}/{len(searches)}) Found {len(results)}, kept {kept} ({new_count} new)"
+                if filtered_count:
+                    msg += f" -- dropped {filtered_count} senior/mid"
+                progress_callback(msg)
 
     duration = time.time() - start
 

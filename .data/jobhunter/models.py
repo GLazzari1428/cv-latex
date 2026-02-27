@@ -99,7 +99,7 @@ def seed_default_profiles():
                     {"term": "SRE junior", "location": "Brazil", "distance": None, "remote": True},
                     {"term": "DevOps engineer junior", "location": "Brazil", "distance": None, "remote": True},
                 ],
-                "sites": ["indeed", "linkedin", "glassdoor"],
+                "sites": ["indeed", "linkedin"],
             },
             {
                 "name": "sysadmin",
@@ -131,7 +131,7 @@ def seed_default_profiles():
                     {"term": "junior systems administrator remote", "location": "", "distance": None, "remote": True},
                     {"term": "DevOps intern remote", "location": "", "distance": None, "remote": True},
                 ],
-                "sites": ["indeed", "linkedin", "glassdoor", "zip_recruiter"],
+                "sites": ["indeed", "linkedin", "zip_recruiter"],
             },
         ]
 
@@ -269,10 +269,17 @@ def save_profile(profile_id, name, searches, sites, is_active):
     """Create or update a profile."""
     with db_session() as conn:
         if profile_id:
-            conn.execute(
-                "UPDATE profiles SET name=?, searches_json=?, sites_json=?, is_active=? WHERE id=?",
-                (name, json.dumps(searches), json.dumps(sites), int(is_active), profile_id),
-            )
+            # If searches/sites are empty, only toggle is_active (don't wipe data)
+            if not searches and not sites:
+                conn.execute(
+                    "UPDATE profiles SET is_active=? WHERE id=?",
+                    (int(is_active), profile_id),
+                )
+            else:
+                conn.execute(
+                    "UPDATE profiles SET name=?, searches_json=?, sites_json=?, is_active=? WHERE id=?",
+                    (name, json.dumps(searches), json.dumps(sites), int(is_active), profile_id),
+                )
         else:
             conn.execute(
                 "INSERT INTO profiles (name, searches_json, sites_json, is_active) VALUES (?, ?, ?, ?)",
