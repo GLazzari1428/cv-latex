@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} - Job Hunter{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Job Detail</h2>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+</div>
+
+<div class="job-detail-card">
+    <div class="flex-between">
+        <div>
+            <h2>{{ job.title }}</h2>
+            <span class="job-company" style="font-size:1rem;">{{ job.company or 'Unknown Company' }}</span>
+        </div>
+        <span
+            class="relevance-badge {% if job.relevance_score >= 50 %}relevance-high{% elif job.relevance_score >= 25 %}relevance-mid{% else %}relevance-low{% endif %}"
+            style="font-size:1.1rem;padding:6px 14px;">
+            {{ job.relevance_score }}
+        </span>
+    </div>
+
+    <div class="job-detail-meta mt-1">
+        <span>{{ job.location or 'Location not specified' }}</span>
+        <span><span class="source-badge">{{ job.site or '-' }}</span></span>
+        {% if job.is_remote %}<span style="color:var(--ctp-green);">Remote</span>{% endif %}
+        {% if job.date_posted %}<span>Posted: {{ job.date_posted }}</span>{% endif %}
+        <span>Found: {{ job.first_seen[:10] if job.first_seen else '-' }}</span>
+        {% if job.salary_min or job.salary_max %}
+        <span style="color:var(--ctp-peach);">
+            {% if job.salary_min %}{{ "%.0f"|format(job.salary_min) }}{% endif %}
+            {% if job.salary_min and job.salary_max %} - {% endif %}
+            {% if job.salary_max %}{{ "%.0f"|format(job.salary_max) }}{% endif %}
+        </span>
+        {% endif %}
+    </div>
+
+    <!-- Status -->
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+        <span class="text-muted text-sm">Status:</span>
+        <span class="status-pill status-{{ job.status }}">{{ job.status }}</span>
+        <div class="quick-actions" style="margin-left:12px;">
+            <button class="act-interested" onclick="setStatus({{ job.id }}, 'interested')">Interested</button>
+            <button class="act-applied" onclick="setStatus({{ job.id }}, 'applied')">Applied</button>
+            <button class="act-rejected" onclick="setStatus({{ job.id }}, 'rejected')">Rejected</button>
+            {% if job.status != 'new' %}
+            <button onclick="setStatus({{ job.id }}, 'new')">Reset</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Apply Link -->
+    {% if job.job_url %}
+    <a href="{{ job.job_url }}" target="_blank" rel="noopener" class="btn btn-primary" style="margin-bottom:16px;">
+        Open Listing
+    </a>
+    {% endif %}
+
+    <!-- Search Info -->
+    <div class="text-muted text-sm mt-1">
+        Profile: <strong>{{ job.search_profile or '-' }}</strong> |
+        Search: <strong>{{ job.search_term or '-' }}</strong>
+    </div>
+
+    <!-- Description -->
+    {% if job.description %}
+    <div class="job-description">{{ job.description }}</div>
+    {% endif %}
+
+    <!-- Notes -->
+    <div class="notes-form">
+        <form action="{{ url_for('set_job_notes', job_id=job.id) }}" method="post">
+            <label
+                style="font-size:0.8rem;font-weight:600;color:var(--ctp-subtext0);display:block;margin-bottom:4px;">NOTES</label>
+            <textarea name="notes" placeholder="Add your notes about this position...">{{ job.notes or '' }}</textarea>
+            <button type="submit" class="btn btn-secondary btn-sm">Save Notes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function setStatus(jobId, status) {
+        fetch(`/job/${jobId}/status`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: status }),
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.ok) location.reload();
+            });
+    }
+</script>
+{% endblock %}

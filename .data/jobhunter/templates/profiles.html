@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% block title %}Search Profiles - Job Hunter{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Search Profiles</h2>
+    <button class="btn btn-primary" onclick="openModal()">New Profile</button>
+</div>
+
+<div class="profile-grid">
+    {% for p in profiles %}
+    <div class="profile-card">
+        <div class="profile-card-header">
+            <h3>{{ p.name }}</h3>
+            <div style="display:flex;gap:8px;align-items:center;">
+                <label class="toggle">
+                    <input type="checkbox" {% if p.is_active %}checked{% endif %}
+                        onchange="toggleActive({{ p.id }}, '{{ p.name }}', this.checked)">
+                    <span class="toggle-slider"></span>
+                </label>
+                <button class="btn btn-ghost btn-sm" onclick='editProfile({{ p|tojson }})'>Edit</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--ctp-red);"
+                    onclick="deleteProfile({{ p.id }})">Delete</button>
+            </div>
+        </div>
+        <ul class="profile-searches">
+            {% for s in p.searches %}
+            <li>
+                <span>"{{ s.term }}"</span>
+                <span class="text-muted text-sm">
+                    {{ s.location or 'Worldwide' }}
+                    {% if s.remote %} (remote){% elif s.distance %} ({{ s.distance }}km){% endif %}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="profile-sites">
+            {% for s in p.sites %}
+            <span class="site-tag">{{ s }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if not profiles %}
+    <div class="empty-state">
+        <h3>No profiles yet</h3>
+        <p>Create a search profile to start scraping jobs.</p>
+        <button class="btn btn-primary" onclick="openModal()">Create Profile</button>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Profile Edit Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <h3 id="modalTitle">New Profile</h3>
+        <input type="hidden" id="profileId">
+
+        <div class="form-group">
+            <label>Profile Name</label>
+            <input type="text" id="profileName" placeholder="e.g. devops-curitiba">
+        </div>
+
+        <div class="form-group">
+            <label>Sites to Search</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="indeed" class="site-cb" checked> Indeed</label>
+                <label><input type="checkbox" value="linkedin" class="site-cb" checked> LinkedIn</label>
+                <label><input type="checkbox" value="glassdoor" class="site-cb" checked> Glassdoor</label>
+                <label><input type="checkbox" value="zip_recruiter" class="site-cb"> ZipRecruiter</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Search Queries</label>
+            <div id="searchEntries"></div>
+            <button class="btn btn-ghost btn-sm mt-1" onclick="addSearchEntry()">+ Add Search</button>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function openModal(data) {
+        document.getElementById('modalOverlay').classList.add('active');
+        if (!data) {
+            document.getElementById('modalTitle').textContent = 'New Profile';
+            document.getElementById('profileId').value = '';
+            document.getElementById('profileName').value = '';
+            document.querySelectorAll('.site-cb').forEach(cb => {
+                cb.checked = ['indeed', 'linkedin', 'glassdoor'].includes(cb.value);
+            });
+            document.getElementById('searchEntries').innerHTML = '';
+            addSearchEntry();
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    function editProfile(profile) {
+        document.getElementById('modalOverlay').classList.add('active');
+        document.getElementById('modalTitle').textContent = 'Edit Profile';
+        document.getElementById('profileId').value = profile.id;
+        document.getElementById('profileName').value = profile.name;
+
+        document.querySelectorAll('.site-cb').forEach(cb => {
+            cb.checked = profile.sites.includes(cb.value);
+        });
+
+        const container = document.getElementById('searchEntries');
+        container.innerHTML = '';
+        profile.searches.forEach(s => addSearchEntry(s));
+    }
+
+    function addSearchEntry(data) {
+        const container = document.getElementById('searchEntries');
+        const div = document.createElement('div');
+        div.className = 'search-entry';
+        div.innerHTML = `
+        <div class="form-row">
+            <div class="form-group" style="flex:2">
+                <label>Search Term</label>
+                <input type="text" class="se-term" placeholder="e.g. DevOps junior" value="${data ? data.term : ''}">
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="se-location" placeholder="e.g. Curitiba, PR, Brazil" value="${data ? data.location || '' : ''}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Distance (km)</label>
+                <input type="number" class="se-distance" placeholder="50" value="${data && data.distance != null ? data.distance : '50'}">
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-end;">
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding-bottom:8px;">
+                    <input type="checkbox" class="se-remote" ${data && data.remote ? 'checked' : ''} style="accent-color:var(--ctp-mauve);width:16px;height:16px;">
+                    Remote
+                </label>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-end;">
+                <button class="btn btn-ghost btn-sm" style="color:var(--ctp-red);margin-bottom:6px;" onclick="this.closest('.search-entry').remove()">Remove</button>
+            </div>
+        </div>
+    `;
+        container.appendChild(div);
+    }
+
+    function saveProfile() {
+        const id = document.getElementById('profileId').value;
+        const name = document.getElementById('profileName').value.trim();
+        const sites = Array.from(document.querySelectorAll('.site-cb:checked')).map(cb => cb.value);
+
+        const entries = document.querySelectorAll('.search-entry');
+        const searches = [];
+        entries.forEach(entry => {
+            const term = entry.querySelector('.se-term').value.trim();
+            if (!term) return;
+            searches.push({
+                term: term,
+                location: entry.querySelector('.se-location').value.trim(),
+                distance: parseInt(entry.querySelector('.se-distance').value) || null,
+                remote: entry.querySelector('.se-remote').checked,
+            });
+        });
+
+        if (!name || !searches.length || !sites.length) {
+            alert('Fill in at least a name, one search, and one site.');
+            return;
+        }
+
+        fetch('/profiles/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id || null, name, searches, sites, is_active: true }),
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.ok) location.reload();
+                else alert(data.error);
+            });
+    }
+
+    function deleteProfile(id) {
+        if (!confirm('Delete this profile?')) return;
+        fetch(`/profiles/${id}/delete`, { method: 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                if (data.ok) location.reload();
+            });
+    }
+
+    function toggleActive(id, name, active) {
+        // Quick toggle: re-save with just the is_active changed
+        fetch('/profiles/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, name: name, searches: [], sites: [], is_active: active }),
+        })
+            .then(() => location.reload());
+    }
+</script>
+{% endblock %}

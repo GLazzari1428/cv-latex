@@ -6,3 +6,5 @@
 *.fls
 *.fdb_latexmk.data/jobspy-venv/
 .data/jobs_*.csv
+.data/jobhunter/jobhunter.db
+.data/jobhunter/__pycache__/

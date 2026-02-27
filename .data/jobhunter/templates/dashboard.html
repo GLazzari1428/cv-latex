@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Job Hunter{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Dashboard</h2>
+    <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn btn-primary" id="scrapeBtn" onclick="toggleScrapePanel()">
+            Run Scrape
+        </button>
+    </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+    <div class="stat-card accent-mauve">
+        <div class="stat-label">Total Jobs</div>
+        <div class="stat-value">{{ stats.total }}</div>
+    </div>
+    <div class="stat-card accent-teal">
+        <div class="stat-label">New Today</div>
+        <div class="stat-value">{{ stats.new_today }}</div>
+    </div>
+    <div class="stat-card accent-blue">
+        <div class="stat-label">Interested</div>
+        <div class="stat-value">{{ stats.interested }}</div>
+    </div>
+    <div class="stat-card accent-green">
+        <div class="stat-label">Applied</div>
+        <div class="stat-value">{{ stats.applied }}</div>
+    </div>
+    <div class="stat-card accent-red">
+        <div class="stat-label">Rejected</div>
+        <div class="stat-value">{{ stats.rejected }}</div>
+    </div>
+    <div class="stat-card accent-peach">
+        <div class="stat-label">Unsorted</div>
+        <div class="stat-value">{{ stats.new }}</div>
+    </div>
+    <div class="stat-card accent-yellow">
+        <div class="stat-label">Avg. Score</div>
+        <div class="stat-value">{{ stats.avg_score }}</div>
+    </div>
+</div>
+
+<!-- Scrape Panel -->
+<div class="scrape-panel" id="scrapePanel">
+    <div class="flex-between">
+        <div>
+            <strong>Scrape Jobs</strong>
+            <span class="text-muted text-sm" style="margin-left:8px;">Select a profile and start scraping</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="toggleScrapePanel()">Close</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:12px;">
+        <select id="scrapeProfile"
+            style="background:var(--ctp-mantle);border:1px solid var(--ctp-surface1);color:var(--ctp-text);padding:8px 12px;border-radius:var(--radius);font-family:inherit;font-size:0.85rem;">
+            <option value="all">All Profiles</option>
+            {% for p in profiles %}
+            <option value="{{ p.name }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" id="startScrapeBtn" onclick="startScrape()">
+            Start
+        </button>
+        <span class="text-muted text-sm" id="scrapeStatus"></span>
+    </div>
+    <div class="scrape-log" id="scrapeLog" style="display:none;"></div>
+</div>
+
+<!-- Filters -->
+<form class="filter-bar" method="get" action="{{ url_for('dashboard') }}">
+    <input type="text" name="search" placeholder="Search by title, company, or description..." value="{{ f_search }}">
+    <select name="status">
+        <option value="all" {% if f_status=='all' %}selected{% endif %}>All Status</option>
+        <option value="new" {% if f_status=='new' %}selected{% endif %}>New</option>
+        <option value="interested" {% if f_status=='interested' %}selected{% endif %}>Interested</option>
+        <option value="applied" {% if f_status=='applied' %}selected{% endif %}>Applied</option>
+        <option value="rejected" {% if f_status=='rejected' %}selected{% endif %}>Rejected</option>
+    </select>
+    <select name="profile">
+        <option value="all" {% if f_profile=='all' %}selected{% endif %}>All Profiles</option>
+        {% for p in profiles %}
+        <option value="{{ p.name }}" {% if f_profile==p.name %}selected{% endif %}>{{ p.name }}</option>
+        {% endfor %}
+    </select>
+    <select name="min_relevance">
+        <option value="0" {% if f_min_relevance==0 %}selected{% endif %}>Any Score</option>
+        <option value="10" {% if f_min_relevance==10 %}selected{% endif %}>10+</option>
+        <option value="25" {% if f_min_relevance==25 %}selected{% endif %}>25+</option>
+        <option value="50" {% if f_min_relevance==50 %}selected{% endif %}>50+</option>
+        <option value="75" {% if f_min_relevance==75 %}selected{% endif %}>75+</option>
+    </select>
+    <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--ctp-subtext0);cursor:pointer;">
+        <input type="checkbox" name="remote" value="1" {% if f_remote %}checked{% endif %}
+            style="accent-color:var(--ctp-mauve);">
+        Remote only
+    </label>
+    <button type="submit" class="btn btn-secondary btn-sm">Filter</button>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-ghost btn-sm">Clear</a>
+</form>
+
+<!-- Results Count -->
+<div class="text-muted text-sm mb-2">
+    Showing {{ jobs|length }} of {{ total }} jobs
+    {% if f_search %} matching "{{ f_search }}"{% endif %}
+</div>
+
+<!-- Job Table -->
+{% if jobs %}
+<table class="job-table">
+    <thead>
+        <tr>
+            <th style="width:50px;">
+                <a href="?{{ build_sort_url('relevance_score') }}">Score</a>
+            </th>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Source</th>
+            <th>
+                <a href="?{{ build_sort_url('first_seen') }}">Found</a>
+            </th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>
+                <span
+                    class="relevance-badge {% if job.relevance_score >= 50 %}relevance-high{% elif job.relevance_score >= 25 %}relevance-mid{% else %}relevance-low{% endif %}">
+                    {{ job.relevance_score }}
+                </span>
+            </td>
+            <td class="job-title-cell">
+                <a href="{{ url_for('job_detail', job_id=job.id) }}" class="job-title-link">{{ job.title }}</a>
+                <span class="job-company">{{ job.company or 'Unknown' }}</span>
+            </td>
+            <td class="job-location">{{ job.location or '-' }}</td>
+            <td><span class="source-badge">{{ job.site or '-' }}</span></td>
+            <td class="text-muted text-sm">{{ job.first_seen[:10] if job.first_seen else '-' }}</td>
+            <td>
+                <span class="status-pill status-{{ job.status }}">{{ job.status }}</span>
+            </td>
+            <td>
+                <div class="quick-actions">
+                    <button class="act-interested" onclick="setStatus({{ job.id }}, 'interested')"
+                        title="Interested">INT</button>
+                    <button class="act-applied" onclick="setStatus({{ job.id }}, 'applied')"
+                        title="Applied">APP</button>
+                    <button class="act-rejected" onclick="setStatus({{ job.id }}, 'rejected')"
+                        title="Reject">REJ</button>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Pagination -->
+{% if total_pages > 1 %}
+<div class="pagination">
+    {% if page > 1 %}
+    <a
+        href="?page={{ page - 1 }}&status={{ f_status }}&profile={{ f_profile }}&search={{ f_search }}&min_relevance={{ f_min_relevance }}&remote={{ '1' if f_remote else '' }}&sort={{ f_sort }}&dir={{ f_dir }}">Prev</a>
+    {% else %}
+    <span class="disabled">Prev</span>
+    {% endif %}
+
+    {% for p in range(1, total_pages + 1) %}
+    {% if p == page %}
+    <span class="current">{{ p }}</span>
+    {% elif p <= 3 or p> total_pages - 3 or (p >= page - 1 and p <= page + 1) %} <a
+            href="?page={{ p }}&status={{ f_status }}&profile={{ f_profile }}&search={{ f_search }}&min_relevance={{ f_min_relevance }}&remote={{ '1' if f_remote else '' }}&sort={{ f_sort }}&dir={{ f_dir }}">
+            {{ p }}</a>
+            {% elif p == 4 or p == total_pages - 3 %}
+            <span class="text-muted">...</span>
+            {% endif %}
+            {% endfor %}
+
+            {% if page < total_pages %} <a
+                href="?page={{ page + 1 }}&status={{ f_status }}&profile={{ f_profile }}&search={{ f_search }}&min_relevance={{ f_min_relevance }}&remote={{ '1' if f_remote else '' }}&sort={{ f_sort }}&dir={{ f_dir }}">
+                Next</a>
+                {% else %}
+                <span class="disabled">Next</span>
+                {% endif %}
+</div>
+{% endif %}
+
+{% else %}
+<div class="empty-state">
+    <h3>No jobs found</h3>
+    <p>Run a scrape to pull in listings, or adjust your filters.</p>
+    <button class="btn btn-primary" onclick="toggleScrapePanel()">Run Scrape</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function toggleScrapePanel() {
+        document.getElementById('scrapePanel').classList.toggle('active');
+    }
+
+    function startScrape() {
+        const profile = document.getElementById('scrapeProfile').value;
+        const btn = document.getElementById('startScrapeBtn');
+        const log = document.getElementById('scrapeLog');
+        const status = document.getElementById('scrapeStatus');
+
+        btn.disabled = true;
+        btn.textContent = 'Running...';
+        log.style.display = 'block';
+        log.innerHTML = '';
+        status.textContent = 'Scraping in progress...';
+
+        fetch('/scrape', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ profile: profile, limit: 30 }),
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) {
+                    status.textContent = 'Error: ' + data.error;
+                    btn.disabled = false;
+                    btn.textContent = 'Start';
+                    return;
+                }
+                // Listen for SSE progress
+                const es = new EventSource('/scrape/status');
+                es.onmessage = function (e) {
+                    const line = document.createElement('div');
+                    line.className = 'log-line';
+                    line.textContent = e.data;
+                    log.appendChild(line);
+                    log.scrollTop = log.scrollHeight;
+
+                    if (e.data.startsWith('DONE|') || e.data.startsWith('ERROR|')) {
+                        es.close();
+                        btn.disabled = false;
+                        btn.textContent = 'Start';
+                        status.textContent = e.data.startsWith('DONE|') ? 'Complete - reloading...' : 'Error occurred';
+                        if (e.data.startsWith('DONE|')) {
+                            setTimeout(() => location.reload(), 1500);
+                        }
+                    }
+                };
+                es.onerror = function () {
+                    es.close();
+                    btn.disabled = false;
+                    btn.textContent = 'Start';
+                    status.textContent = 'Connection lost';
+                };
+            })
+            .catch(err => {
+                status.textContent = 'Request failed';
+                btn.disabled = false;
+                btn.textContent = 'Start';
+            });
+    }
+
+    function setStatus(jobId, status) {
+        fetch(`/job/${jobId}/status`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: status }),
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.ok) location.reload();
+            });
+    }
+</script>
+{% endblock %}

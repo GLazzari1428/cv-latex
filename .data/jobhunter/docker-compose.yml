@@ -1,0 +1,14 @@
+services:
+  jobhunter:
+    build: .
+    container_name: jobhunter
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+    volumes:
+      - jobhunter-data:/data
+    environment:
+      - JOBHUNTER_DB=/data/jobhunter.db
+
+volumes:
+  jobhunter-data:
