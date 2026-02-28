@@ -1,0 +1,137 @@
+================================================================================
+       WEEKLY JOB SEARCH PROMPT -- Paste this into a new conversation
+       Last updated: 2026-02-28
+================================================================================
+
+Search for junior/intern job openings for me. Here is my profile and what
+I'm looking for. Use the BROWSER to search the actual platforms listed below
+-- do NOT use python-jobspy or any scraping library, those are unreliable.
+
+IMPORTANT RULES:
+- ONLY return positions that are JUNIOR, INTERN (ESTAGIO), TRAINEE, or
+  entry-level. I do NOT want senior, pleno, mid-level, specialist, lead,
+  or any experienced roles. Skip them entirely.
+- Provide DIRECT CLICKABLE LINKS to each listing.
+- Output results as a markdown table.
+- Do not use emojis anywhere.
+- If a listing looks expired or returns 404, skip it.
+
+================================================================================
+MY PROFILE
+================================================================================
+
+Name:       Gustavo Lazzari, 23
+Location:   Curitiba, PR, Brazil
+Education:  B.Sc. Computer Science at PUCPR (5th period, graduating ~June 2028)
+Languages:  Portuguese (native), English (fluent, CAE B2), German (intermediate)
+Available:  Immediately
+
+Experience:
+- Software Development Intern at Court of Justice of Parana (TJPR)
+  Aug 2021 - Dec 2022: PHP/Laravel, MySQL, Docker, GitHub Actions, AWS EC2, GCP
+
+Key Skills:
+- Proxmox VE (production homelab with LXC + full VMs)
+- Docker / Docker Compose (20+ containerized services)
+- Linux administration (Arch, Debian -- daily driver and server)
+- OPNsense firewall, Nginx reverse proxy, Cloudflare tunnels, WireGuard, DNS
+- Prometheus + Grafana monitoring stack
+- ZFS storage, Nextcloud, Immich
+- CI/CD with GitHub Actions
+- Python, Bash, Go
+- AWS (studying for CCP), GCP, Azure basics
+- ESP32 / IoT (ESPHome, MQTT, Home Assistant)
+- Frigate NVR (AI object detection)
+- Hardware repair and circuit modifications
+
+================================================================================
+TARGET ROLES (in priority order)
+================================================================================
+
+1. PAID INTERNSHIP in Curitiba (highest priority)
+   - Estagio em infraestrutura / TI / DevOps / cloud / redes
+   - Estagio em suporte / operacoes
+
+2. JUNIOR position in Curitiba (hybrid or on-site OK)
+   - Analista de infraestrutura junior
+   - Analista DevOps junior
+   - Analista de TI junior / Suporte TI junior
+   - Analista cloud junior
+
+3. JUNIOR REMOTE position (Brazil)
+   - DevOps junior remoto
+   - SRE junior remoto
+   - Infrastructure engineer junior remoto
+
+4. JUNIOR REMOTE position (international, any timezone overlap)
+   - Junior DevOps / SRE / Infrastructure / Platform Engineer
+   - Remote LATAM or worldwide
+
+================================================================================
+PLATFORMS TO SEARCH (use the browser, visit each one)
+================================================================================
+
+Search these platforms IN THIS ORDER. Spend the most time on LinkedIn and
+Gupy as they have the best listings for Brazil.
+
+1. LinkedIn (linkedin.com/jobs)
+   Searches to run:
+   - "estagio DevOps" location: Curitiba
+   - "estagio infraestrutura TI" location: Curitiba
+   - "analista DevOps junior" location: Curitiba
+   - "analista infraestrutura junior" location: Curitiba
+   - "DevOps junior" location: Brazil, filter: Remote
+   - "SRE junior" location: Brazil, filter: Remote
+   Use filters: Date posted = Past week, Experience = Internship + Entry level
+
+2. Gupy (portal.gupy.io)
+   Search: "DevOps", "infraestrutura", "estagio TI", "cloud"
+   Filter by: Curitiba or remote
+
+3. Indeed BR (br.indeed.com)
+   Search: "DevOps estagio OR junior" location: Curitiba, PR
+   Search: "infraestrutura TI estagio OR junior" location: Curitiba, PR
+
+4. Catho (catho.com.br)
+   Search: "estagio TI infraestrutura" location: Curitiba
+
+5. RemoteOK (remoteok.com)
+   Search: DevOps + SRE, filter by junior/entry or LATAM
+
+6. Himalayas (himalayas.app)
+   Search: DevOps junior, filter: Brazil or LATAM
+
+================================================================================
+COMPANIES TO CHECK DIRECTLY (if time allows)
+================================================================================
+
+These Curitiba companies frequently hire interns/juniors in infra/DevOps:
+- Ebanx:         boards.greenhouse.io/ebanx
+- Grupo Positivo: grupopositivo.gupy.io
+- Bosch:         bosch careers (SmartRecruiters)
+- Volvo:         volvogroup.com/careers
+- Stefanini:     stefanini.gupy.io
+- GFT:           gft.com/careers
+
+================================================================================
+OUTPUT FORMAT
+================================================================================
+
+For each job found, provide:
+
+| # | Company | Title | Location | Level | Link |
+|---|---------|-------|----------|-------|------|
+| 1 | Example Corp | Estagio DevOps | Curitiba | Estagio | [LinkedIn](url) |
+
+Group results by priority tier:
+- TIER 1: Curitiba internships
+- TIER 2: Curitiba junior
+- TIER 3: Remote Brazil junior
+- TIER 4: Remote international junior
+
+After the table, add:
+- A "RECOMMENDED: Apply first" section with the top 3-5 best matches
+- Which CV to use: devops_sre, sysadmin_infrastructure_intern, or main
+  (CVs are in the cv-latex repo at ~/Gitclones/cv-latex/)
+
+================================================================================
