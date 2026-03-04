@@ -2,7 +2,7 @@
 % Gerado: 2026-02-26
 % Template: Baseado em Rover Resume (https://github.com/subidit/rover-resume)
 
-\documentclass[10pt]{article}
+\documentclass[11.5pt]{article}
 
 \usepackage[margin=0.6in, a4paper]{geometry}
 \setcounter{secnumdepth}{0}
@@ -18,6 +18,7 @@
 \pagestyle{empty}
 \pdfgentounicode=1
 \setlength{\parskip}{1pt}
+\linespread{1.15}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{hyperref}
@@ -39,7 +40,7 @@
 \section{Forma\c{c}\~{a}o Acad\^{e}mica}
 \subsection{Pontif\'{i}cia Universidade Cat\'{o}lica do Paran\'{a} $|$ {\normalfont\itshape Bacharelado em Ci\^{e}ncia da Computa\c{c}\~{a}o} \hfill 2024 -- 2028}
 \begin{itemize}
-	\item Conclus\~{a}o prevista: Junho 2028 $|$ Estrutura de Dados, Sistemas Operacionais, Banco de Dados, Seguran\c{c}a de Redes
+	\item Conclus\~{a}o prevista: Mar\c{c}o 2028 $|$ Estrutura de Dados, Sistemas Operacionais, Banco de Dados, Seguran\c{c}a de Redes
 \end{itemize}
 \subsection{Col\'{e}gio Su\'{i}\c{c}o-Brasileiro de Curitiba $|$ {\normalfont\itshape Ensino M\'{e}dio e Diploma Bil\'{i}ngue IB} \hfill 2017 -- 2020}
 
@@ -53,29 +54,29 @@
 \end{itemize}
 
 \section{Projetos}
-\subsection{Infraestrutura Homelab Multi-N\'{o} $|$ \normalfont\textit{Ambiente Pessoal de N\'{i}vel Profissional} \hfill Em Andamento}
+\subsection{Infraestrutura Homelab $|$ \normalfont\textit{Ambiente Pessoal de Aprendizado} \hfill Em Andamento}
 \begin{itemize}
-	\item Arquitetei um cluster Proxmox VE de dois n\'{o}s (Xeon E5-2450L/64GB + i5/16GB) hospedando 20+ VMs e containers LXC simult\^{a}neos executando servi\c{c}os auto-hospedados incluindo Jellyfin, Nextcloud, Frigate NVR e Home Assistant.
+	\item Arquitetei um cluster Proxmox VE de dois n\'{o}s hospedando VMs e containers LXC executando servi\c{c}os auto-hospedados.
 	\item Projetei seguran\c{c}a de rede com segmenta\c{c}\~{a}o via VLANs (IoT/produ\c{c}\~{a}o), proxy reverso Nginx atr\'{a}s de VPN WireGuard, e Cloudflare Zero Trust com autentica\c{c}\~{a}o TOTP para endpoints p\'{u}blicos.
-	\item Implantei stack completa de observabilidade (Prometheus, Grafana, Scrutiny para an\'{a}lise S.M.A.R.T. de discos) e pipeline automatizado de backup com replica\c{c}\~{a}o offsite para Google Drive atrav\'{e}s do n\'{o} secund\'{a}rio.
-	\item Gerencio pools ZFS com experi\^{e}ncia pr\'{a}tica em recupera\c{c}\~{a}o de falhas de disco; DNS de alta disponibilidade via PiHole em ambos os n\'{o}s; infraestrutura protegida por nobreak com SSL/TLS via Certbot e desafios DNS Cloudflare.
+	\item Implantei stack completa de observabilidade (Prometheus, Grafana, Scrutiny para an\'{a}lise S.M.A.R.T. de discos) e pipeline automatizado de backup com replica\c{c}\~{a}o offsite para Google Drive.
+	\item Gerencio pools ZFS com experi\^{e}ncia pr\'{a}tica em recupera\c{c}\~{a}o de falhas de disco.
 \end{itemize}
 
-\subsection{Rede IoT \& Casa Inteligente $|$ \normalfont\textit{ESP32 / ESPHome / Home Assistant} \hfill Em Andamento}
+\subsection{Rede IoT \& Casa Inteligente $|$ \normalfont\textit{ESP32 / MQTT / Home Assistant} \hfill Em Andamento}
 \begin{itemize}
-	\item Implanto e mantenho 10+ dispositivos ESP32 para controle de ilumina\c{c}\~{a}o, interruptores inteligentes e instala\c{c}\~{o}es WLED, configurados inteiramente via ESPHome (YAML/Jinja2).
+	\item Implanto e mantenho dispositivos ESP32 para controle de ilumina\c{c}\~{a}o, interruptores inteligentes e instala\c{c}\~{o}es WLED.
 	\item Integro todos os sensores e atuadores IoT com Home Assistant via MQTT para automa\c{c}\~{a}o centralizada, agendamento e vigil\^{a}ncia com IA (Frigate NVR com detec\c{c}\~{a}o de objetos).
-	\item Construo hardware personalizado incluindo controles remotos com switches Cherry MX reaproveitados; 8+ anos de experi\^{e}ncia di\'{a}ria em soldagem e reparo de eletr\^{o}nicos.
+	\item Construo hardware personalizado para suprir as necessidades do projeto.
 \end{itemize}
 
 \section{Habilidades T\'{e}cnicas}
 \begin{description}
-	\item[Infraestrutura] Linux Admin (Arch/Debian), Proxmox VE, Docker, Docker Compose, LXC, ZFS, systemd
-	\item[Redes] OPNsense, OpenWRT, Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), PiHole, SSL/TLS
+	\item[Infraestrutura] Linux Admin, Proxmox VE, VMware ESXi, Docker, Docker Compose, LXC, ZFS, RAID
+	\item[Redes] OPNsense, Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), SSL/TLS
 	\item[Monitoramento] Prometheus, Grafana, Scrutiny (S.M.A.R.T.)
 	\item[DevOps] GitHub Actions, Bash Scripting, YAML/IaC, Python, Pipelines CI/CD
-	\item[Cloud] AWS (EC2, em curso para Cloud Practitioner), GCP (Compute Engine)
-	\item[IoT] ESP32, ESPHome, MQTT, WLED, Home Assistant, Frigate NVR
+	\item[Cloud] AWS (EC2), GCP (Compute Engine) e Azure
+	\item[IoT] ESP32, ESPHome, MQTT, WLED, Home Assistant, Frigate NVR, FreeRTOS
 	\item[Idiomas] Portugu\^{e}s (Nativo), Ingl\^{e}s (Fluente), Alem\~{a}o (Intermedi\'{a}rio)
 \end{description}
 
