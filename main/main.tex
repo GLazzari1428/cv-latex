@@ -2,7 +2,7 @@
 % Generated: 2026-02-26
 % Template: Based on Rover Resume (https://github.com/subidit/rover-resume)
 
-\documentclass[10pt]{article}
+\documentclass[11.5pt]{article}
 
 \usepackage[margin=0.6in, a4paper]{geometry}
 \setcounter{secnumdepth}{0}
@@ -39,7 +39,7 @@
 \section{Education}
 \subsection{Pontifical Catholic University of Paran\'{a} $|$ {\normalfont\itshape B.Sc. Computer Science} \hfill 2024 -- 2028}
 \begin{itemize}
-	\item Expected graduation: June 2028 $|$ Data Structures, Operating Systems, Databases, Network Security
+	\item Expected graduation: March 2028 $|$ Data Structures, Operating Systems, Databases, Network Security
 \end{itemize}
 \subsection{Swiss School of Curitiba $|$ {\normalfont\itshape High School \& IB Bilingual Diploma} \hfill 2017 -- 2020}
 
@@ -53,33 +53,33 @@
 \end{itemize}
 
 \section{Projects}
-\subsection{Multi-Node Homelab Infrastructure $|$ \normalfont\textit{Production-Grade Personal Environment} \hfill Ongoing}
+\subsection{Homelab Infrastructure $|$ \normalfont\textit{Personal Learning Environment} \hfill Ongoing}
 \begin{itemize}
-	\item Architected a two-node Proxmox VE cluster (Xeon E5-2450L/64GB + i5/16GB) hosting 20+ concurrent VMs and LXC containers running self-hosted services including Jellyfin, Nextcloud, Frigate NVR, and Home Assistant.
+	\item Architected a two-node Proxmox VE cluster hosting VMs and LXC containers running self-hosted services.
 	\item Engineered network security with VLAN segmentation (IoT/production), Nginx reverse proxy behind WireGuard VPN, and Cloudflare Zero Trust with TOTP authentication for public-facing endpoints.
-	\item Deployed full observability stack (Prometheus, Grafana, Scrutiny for disk S.M.A.R.T. analytics) and automated backup pipeline with offsite replication to Google Drive across the secondary node.
-	\item Manage ZFS storage pools with hands-on disk failure recovery; high-availability DNS via PiHole across both nodes; UPS-protected infrastructure with SSL/TLS via Certbot and Cloudflare DNS challenges.
+	\item Deployed full observability stack (Prometheus, Grafana, Scrutiny for disk S.M.A.R.T. analytics) and automated backup pipeline with offsite replication to Google Drive.
+	\item Manage ZFS storage pools with hands-on disk failure recovery.
 \end{itemize}
 
-\subsection{IoT \& Smart Home Network $|$ \normalfont\textit{ESP32 / ESPHome / Home Assistant} \hfill Ongoing}
+\subsection{IoT \& Smart Home Network $|$ \normalfont\textit{ESP32 / MQTT / Home Assistant} \hfill Ongoing}
 \begin{itemize}
-	\item Deploy and maintain 10+ ESP32 devices for lighting control, smart switches, and WLED installations, configured entirely via ESPHome (YAML/Jinja2).
+	\item Deploy and maintain ESP32 devices for lighting control, smart switches, and WLED installations.
 	\item Integrate all IoT sensors and actuators with Home Assistant via MQTT for centralized automation, scheduling, and AI-driven surveillance (Frigate NVR with object detection).
-	\item Build custom hardware including remote controllers with salvaged Cherry MX switches; 8+ years of daily soldering and electronics repair experience.
+	\item Build custom hardware to meet project needs.
 \end{itemize}
 
 \section{Technical Skills}
 \begin{description}
-	\item[Infrastructure] Linux Admin (Arch/Debian), Proxmox VE, Docker, Docker Compose, LXC, ZFS, systemd
-	\item[Networking] OPNsense, OpenWRT, Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), PiHole, SSL/TLS
+	\item[Infrastructure] Linux Admin, Proxmox VE, VMware ESXi, Docker, Docker Compose, LXC, ZFS, RAID
+	\item[Networking] OPNsense, Nginx, WireGuard, Cloudflare (Tunnels/Zero Trust), SSL/TLS
 	\item[Monitoring] Prometheus, Grafana, Scrutiny (S.M.A.R.T.)
 	\item[DevOps] GitHub Actions, Bash Scripting, YAML/IaC, Python, CI/CD Pipelines
-	\item[Cloud] AWS (EC2, currently pursuing Cloud Practitioner), GCP (Compute Engine)
-	\item[IoT] ESP32, ESPHome, MQTT, WLED, Home Assistant, Frigate NVR
+	\item[Cloud] AWS (EC2), GCP (Compute Engine), and Azure
+	\item[IoT] ESP32, ESPHome, MQTT, WLED, Home Assistant, Frigate NVR, FreeRTOS
 	\item[Languages] Portuguese (Native), English (Fluent), German (Intermediate)
 \end{description}
 
 \section{Certifications}
-Cambridge Advanced English (CAE -- B2) $|$ Deutsches Sprachdiplom (DSD -- B1/B2) $|$ Currently pursuing: AWS Certified Cloud Practitioner (CLF-C02)
+Cambridge Advanced English (CAE -- B2) $|$ Deutsches Sprachdiplom (DSD -- B1/B2) $|$ In progress: AWS Certified Cloud Practitioner (CLF-C02)
 
 \end{document}
