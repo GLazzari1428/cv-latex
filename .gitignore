@@ -8,3 +8,4 @@
 .data/jobs_*.csv
 .data/jobhunter/jobhunter.db
 .data/jobhunter/__pycache__/
+.data
