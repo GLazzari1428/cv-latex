@@ -1,0 +1,95 @@
+% Gustavo Lazzari -- AI Internship CV (EN)
+% Updated: 2026-05-25
+% Framing: AI Infrastructure / Applied AI (honest -- no ML training experience)
+
+\documentclass[10.5pt]{article}
+
+\usepackage[margin=0.6in, a4paper]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{5pt}{2pt}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+\titlespacing{\subsubsection}{0pt}{2pt}{1pt}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,topsep=1pt,left=0pt .. \parindent}
+\setlist[description]{noitemsep,topsep=1pt,itemsep=1pt}
+\pagestyle{empty}
+\pdfgentounicode=1
+\setlength{\parskip}{1pt}
+\linespread{1.15}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\urlstyle{same}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries Gustavo Lazzari} \\
+    \vspace{2pt}
+    \href{mailto:gustavotlazzari@gmail.com}{gustavotlazzari@gmail.com} $|$
+    +55 41 98773-2772 $|$
+    \href{https://www.linkedin.com/in/glazzari}{linkedin.com/in/glazzari} $|$
+    \href{https://github.com/GLazzari1428}{github.com/GLazzari1428} $|$
+    Curitiba, PR, Brazil
+\end{center}
+
+\section{Profile}
+Computer Science student with hands-on experience deploying AI inference workloads on self-managed
+infrastructure. Runs Frigate NVR with real-time object detection in a production homelab backed by
+Linux, Docker, and a GPU-capable Proxmox cluster. Strong infrastructure foundation relevant to
+AI deployment and MLOps roles. Fluent English (CAE C1), German B2 (DSD II).
+EU eligibility from Jan 2027 (Italian citizenship).
+
+\section{Education}
+\subsection{Pontifical Catholic University of Paran\'{a} $|$ {\normalfont\itshape B.Sc. Computer Science} \hfill 2024 -- 2028}
+\begin{itemize}
+    \item Expected graduation: March 2028. Coursework: Data Structures, Algorithms, Operating Systems, Databases.
+\end{itemize}
+\subsection{Swiss School of Curitiba $|$ {\normalfont\itshape IB Bilingual Diploma} \hfill 2017 -- 2020}
+
+\section{Experience}
+\subsection{Court of Justice of Paran\'{a} (TJPR) \hfill Curitiba, Brazil}
+\subsubsection{IT Intern \hfill Aug 2021 -- Dec 2022}
+\begin{itemize}
+    \item Built a PHP web application (backend and frontend) for certificate management and
+          administrative workflows of the TJPR School of Magistracy.
+    \item Containerized the application with Docker and Docker Compose; deployed on AWS EC2;
+          automated deployments with GitHub Actions; MySQL as the relational database.
+    \item Configured Nginx as web server and reverse proxy.
+\end{itemize}
+
+\section{Projects}
+\subsection{AI Inference on Homelab Infrastructure $|$ \normalfont\textit{Frigate NVR / Proxmox} \hfill Ongoing}
+\begin{itemize}
+    \item Runs Frigate NVR with real-time object detection (AI inference) on a self-managed, GPU-capable
+          Proxmox VE cluster; integrates detection events with Home Assistant for automated responses.
+    \item Containerized inference workloads run on a hardened Linux environment with VLAN-segmented
+          networking, WireGuard VPN, and Cloudflare Zero Trust access control.
+    \item Experimented with local LLM deployment (Ollama) on homelab hardware; familiar with
+          quantized model inference on consumer-grade GPUs.
+\end{itemize}
+\subsection{Homelab -- Infrastructure for AI Workloads $|$ \normalfont\textit{Proxmox / Docker / Linux} \hfill Ongoing}
+\begin{itemize}
+    \item Two-node Proxmox VE cluster with GPU passthrough, ZFS storage, and full observability
+          via Prometheus and Grafana -- capable of serving containerized AI/ML workloads.
+    \item Automated backup pipeline with offsite replication and monitoring via Scrutiny (S.M.A.R.T.).
+\end{itemize}
+
+\section{Technical Skills}
+\begin{description}
+    \item[Applied AI] Frigate NVR (object detection inference), local LLM deployment (Ollama), Home Assistant AI integration
+    \item[Infrastructure] Linux Admin, Proxmox VE (GPU passthrough), Docker/Compose, LXC, ZFS
+    \item[Networking] OPNsense, WireGuard, VLANs, Cloudflare ZT/Tunnels, Nginx, DNS/DHCP
+    \item[Monitoring] Prometheus, Grafana, Scrutiny (S.M.A.R.T.)
+    \item[Programming] Python (basic scripts), PHP, Bash, Git, GitHub Actions
+    \item[Languages] Portuguese (Native), English (Fluent -- CAE C1), German (B2 -- DSD II), Italian (Basic)
+\end{description}
+
+\section{Certifications}
+Cambridge Advanced English -- CAE C1 $|$ Deutsches Sprachdiplom -- DSD II B2 $|$ In progress: CCNA 200-301
+
+\end{document}

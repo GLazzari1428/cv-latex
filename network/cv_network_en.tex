@@ -1,0 +1,93 @@
+% Gustavo Lazzari -- Network Engineering CV (EN)
+% Updated: 2026-05-25
+
+\documentclass[10.5pt]{article}
+
+\usepackage[margin=0.6in, a4paper]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{5pt}{2pt}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+\titlespacing{\subsubsection}{0pt}{2pt}{1pt}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,topsep=1pt,left=0pt .. \parindent}
+\setlist[description]{noitemsep,topsep=1pt,itemsep=1pt}
+\pagestyle{empty}
+\pdfgentounicode=1
+\setlength{\parskip}{1pt}
+\linespread{1.15}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\urlstyle{same}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries Gustavo Lazzari} \\
+    \vspace{2pt}
+    \href{mailto:gustavotlazzari@gmail.com}{gustavotlazzari@gmail.com} $|$
+    +55 41 98773-2772 $|$
+    \href{https://www.linkedin.com/in/glazzari}{linkedin.com/in/glazzari} $|$
+    \href{https://github.com/GLazzari1428}{github.com/GLazzari1428} $|$
+    Curitiba, PR, Brazil
+\end{center}
+
+\section{Profile}
+Computer Science student with a hands-on focus on networking and infrastructure. Designs and operates
+a segmented network with OPNsense, VLAN isolation, WireGuard VPN, and Cloudflare Zero Trust on a
+self-built production homelab. Currently studying for CCNA 200-301. Fluent English (CAE C1), German
+B2 (DSD II). EU eligibility from Jan 2027 (Italian citizenship).
+
+\section{Education}
+\subsection{Pontifical Catholic University of Paran\'{a} $|$ {\normalfont\itshape B.Sc. Computer Science} \hfill 2024 -- 2028}
+\begin{itemize}
+    \item Expected graduation: March 2028. Relevant coursework: Computer Networks, Network Security, Operating Systems.
+\end{itemize}
+\subsection{Swiss School of Curitiba $|$ {\normalfont\itshape IB Bilingual Diploma} \hfill 2017 -- 2020}
+
+\section{Experience}
+\subsection{Court of Justice of Paran\'{a} (TJPR) \hfill Curitiba, Brazil}
+\subsubsection{IT Intern \hfill Aug 2021 -- Dec 2022}
+\begin{itemize}
+    \item Configured Nginx as web server and reverse proxy for a PHP application serving the TJPR
+          School of Magistracy; deployed on AWS EC2 with automated deployments via GitHub Actions.
+    \item Containerized the application with Docker and Docker Compose; administered MySQL database.
+    \item Built backend and frontend in PHP for certificate management and administrative workflows.
+\end{itemize}
+
+\section{Projects}
+\subsection{Homelab -- Network Architecture $|$ \normalfont\textit{Personal Production Environment} \hfill Ongoing}
+\begin{itemize}
+    \item Designed and operates a network with OPNsense as the primary firewall/router: VLAN segmentation
+          (IoT isolated from production), per-interface firewall rules, and NAT.
+    \item Maintains WireGuard VPN for secure remote access and Cloudflare Zero Trust with TOTP/MFA
+          for public-facing services.
+    \item Manages recursive DNS, DHCP, and ad/malware filtering via AdGuard Home; Nginx reverse proxy
+          with SSL/TLS termination for internal services.
+    \item Two-node Proxmox VE cluster with VMs and LXC containers; ZFS pools with real disk-failure
+          recovery experience; full observability with Prometheus, Grafana, and Scrutiny.
+\end{itemize}
+\subsection{Segmented IoT Network $|$ \normalfont\textit{ESP32 / MQTT / Frigate NVR} \hfill Ongoing}
+\begin{itemize}
+    \item Fleet of ESP32 devices on an isolated VLAN, communicating via local MQTT broker with Home
+          Assistant; Frigate NVR with AI object detection for surveillance.
+\end{itemize}
+
+\section{Technical Skills}
+\begin{description}
+    \item[Networking] OPNsense (firewall, NAT, rules), WireGuard, VLANs, DNS/DHCP, TCP/IP, Cloudflare ZT/Tunnels, Nginx, AdGuard Home
+    \item[Infrastructure] Linux Admin, Proxmox VE, Docker/Compose, LXC, ZFS
+    \item[Monitoring] Prometheus, Grafana, Scrutiny (S.M.A.R.T.)
+    \item[Dev/Tools] Bash, Python (basic), GitHub Actions, Git, PHP, MySQL
+    \item[IoT/Embedded] ESP32, ESPHome, MQTT, Home Assistant, Frigate NVR
+    \item[Languages] Portuguese (Native), English (Fluent -- CAE C1), German (B2 -- DSD II), Italian (Basic)
+\end{description}
+
+\section{Certifications}
+Cambridge Advanced English -- CAE C1 $|$ Deutsches Sprachdiplom -- DSD II B2 $|$ In progress: CCNA 200-301
+
+\end{document}
